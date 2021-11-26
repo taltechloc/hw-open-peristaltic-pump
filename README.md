@@ -2,7 +2,7 @@
 
 ## Features:
 - Peristaltic pump
-- Cheap and easy to assembly
+- Cheap and easy to assemble
 - Wireless control
 - Battery power
 
