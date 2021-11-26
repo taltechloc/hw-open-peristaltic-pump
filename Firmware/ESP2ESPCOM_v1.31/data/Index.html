@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html xmlns:mso="urn:schemas-microsoft-com:office:office" xmlns:msdt="uuid:C2F41010-65B3-11d1-A29F-00AA00C14882">
+<head>
+	<title>Flow control</title>
+	<meta charset="utf-8" name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="stylesheet" type="text/css" href="main.css">
+	<script src="jquery.js"></script>
+	<script src="myJsFunctions.js"></script>
+
+<!--[if gte mso 9]><xml>
+<mso:CustomDocumentProperties>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor msdt:dt="string">Martin Grosberg</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Editor>
+<mso:xd_Signature msdt:dt="string"></mso:xd_Signature>
+<mso:Order msdt:dt="string">5660300.00000000</mso:Order>
+<mso:ComplianceAssetId msdt:dt="string"></mso:ComplianceAssetId>
+<mso:TemplateUrl msdt:dt="string"></mso:TemplateUrl>
+<mso:xd_ProgID msdt:dt="string"></mso:xd_ProgID>
+<mso:SharedWithUsers msdt:dt="string"></mso:SharedWithUsers>
+<mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author msdt:dt="string">Martin Grosberg</mso:display_urn_x003a_schemas-microsoft-com_x003a_office_x003a_office_x0023_Author>
+<mso:ContentTypeId msdt:dt="string">0x0101002A9DB9F94E987C4EAB6A9B3ECDDD85C1</mso:ContentTypeId>
+<mso:_SourceUrl msdt:dt="string"></mso:_SourceUrl>
+<mso:_SharedFileIndex msdt:dt="string"></mso:_SharedFileIndex>
+</mso:CustomDocumentProperties>
+</xml><![endif]-->
+</head>
+<body>
+	<h1>Flow control</h1>
+	<div class="slidecontainer">
+		<p>Set the Pump  from 12 to 72 ml/min</p>
+		<input type="range" min="12" max="72" value="12" class="slider" id="Pump1Slider_1">
+		<p>Value: <span id="Slider1Value"></span> output value</p>
+	</div>
+	<div class="slidecontainer">
+		<p>Set the time of pumping</p>
+		<input type="range" min="0" max="120" value="60" class="slider" id="Pump1Slider_2">
+		<p>Value: <span id="Slider2Value"></span> seconds </p>
+	</div>
+  <div class="toggleBox">
+  <p>Turn pump on/off</p>
+    <div class="toggle">
+		 <input type="checkbox" id ="myCheck1">
+		 <label for="" class="onbtn" >On</label>
+		 <label for="" class="ofbtn" >Off</label>
+    </div>
+  </div>  
+	<title></title>
+	<div class="container">
+		<h1 id="count1" >Set Parameters</h1>
+	</div>
+	
+<p>Pump Status</p>
+<table>
+	<tr>
+		<td><canvas id="pumpStatus1" width="50" height="50"></canvas></td>
+	</tr>
+</table>
+
+<h2>Add additional pumps.</h2>
+
+<p>For adding Pumps you need to know the MAC addresses of the pumps:</p>
+
+<form id = "myForm1" onsubmit ="ShowHide(1)">
+  Enter MAC Address: <input type="text" id="p2MAC1" name="p2MAC1" maxlength="4" size="4" value="0x4C">
+<input type="text" id="p2MAC2" name="p2MAC2" maxlength="4" size="4" value="0x11">
+<input type="text" id="p2MAC3" name="p2MAC3" maxlength="4" size="4" value="0xAE">
+<input type="text" id="p2MAC4" name="p2MAC4" maxlength="4" size="4" value="0xEA">
+<input type="text" id="p2MAC5" name="p2MAC5" maxlength="4" size="4" value="0xEE">
+<input type="text" id="p2MAC6" name="p2MAC6" maxlength="4" size="4" value="0xE8">
+  <input type="submit" id="Submitbutton1" value="Submit">
+</form> 
+<p>Connection satus to next pump: <span id="ConnectionStatus1" value="false"></span>  </p>
+<div id="myDIV" >
+
+<h1>Pump 2</h1>
+	<div class="slidecontainer">
+		<p>Set the Pump  from 12 to 72 ml/min</p>
+		<input type="range" min="12" max="72" value="12" class="slider" id="Pump2Slider_1">
+		<p>Value: <span id="Slider3Value"></span> output value</p>
+	</div>
+	<div class="slidecontainer">
+		<p>Set the time of pumping</p>
+		<input type="range" min="0" max="120" value="60" class="slider" id="Pump2Slider_2">
+		<p>Value: <span id="Slider4Value"></span> seconds </p>
+	</div>
+  <div class="toggleBox">
+  <p>Turn pump on/off</p>
+    <div class="toggle">
+		 <input type="checkbox" id ="myCheck2">
+		 <label for="" class="onbtn" >On</label>
+		 <label for="" class="ofbtn" >Off</label> 
+    </div>
+  </div>  
+	<title></title>
+	<div class="container">
+		<h1 id="count2" >Set Parameters</h1>
+	</div>
+	
+<p>Pump Status</p>
+<table>
+	<tr>
+		<td><canvas id="pumpStatus2" width="50" height="50"></canvas></td>
+	</tr>
+</table>
+<p>For adding Pumps you need to know the MAC addresses of the pumps:</p>
+
+<form id = "myForm2" onsubmit ="ShowHide(2)">
+  Enter MAC Address: <input type="text" id="p3MAC1" name="fMAC1" maxlength="4" size="4">
+<input type="text" id="p3MAC2" name="fMAC2" maxlength="4" size="4">
+<input type="text" id="p3MAC3" name="fMAC3" maxlength="4" size="4">
+<input type="text" id="p3MAC4" name="fMAC4" maxlength="4" size="4">
+<input type="text" id="p3MAC5" name="fMAC5" maxlength="4" size="4">
+<input type="text" id="p3MAC6" name="fMAC6" maxlength="4" size="4">
+
+
+  <input type="submit" id="Submitbutton2" value="Submit">
+</form>
+<p>Connection satus to next pump: <span id="ConnectionStatus2" value="false"></span>  </p>
+</div>
+<br></br>
+<br></br>
+<div id="myDIV2">
+<h1>Pump 3</h1>
+	<div class="slidecontainer">
+		<p>Set the Pump  from 12 to 72 ml/min</p>
+		<input type="range" min="12" max="72" value="12" class="slider" id="Pump3Slider_1">
+		<p>Value: <span id="Slider5Value"></span> output value</p>
+	</div>
+	<div class="slidecontainer">
+		<p>Set the time of pumping</p>
+		<input type="range" min="0" max="120" value="60" class="slider" id="Pump3Slider_2">
+		<p>Value: <span id="Slider6Value"></span> seconds </p>
+	</div>
+  <div class="toggleBox">
+  <p>Turn pump on/off</p>
+    <div class="toggle">
+		 <input type="checkbox" id ="myCheck3">
+		 <label for="" class="onbtn" >On</label>
+		 <label for="" class="ofbtn" >Off</label> 
+    </div>
+  </div>  
+	<title></title>
+	<div class="container">
+		<h1 id="count3" >Set Parameters</h1>
+	</div>
+<p>Pump Status</p>
+<table>
+	<tr>
+		<td><canvas id="pumpStatus3" width="50" height="50"></canvas></td>
+	</tr>
+</table>
+</div>
+</body>
